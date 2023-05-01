@@ -1,13 +1,14 @@
 import React from 'react'
 import './App.css'
+import ProductContext from './Context/ProductContext'
+import Store from './Components/store';
+
 
 function App() {
-
-
   return (
- <div>
-  app
- </div>
+<ProductContext >
+<Store/>
+</ProductContext>
   )
 }
 
