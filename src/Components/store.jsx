@@ -6,8 +6,8 @@ export default function StorePage() {
     const products =useContext(ContextProvider)
     
     return (
-        <div>
-       { products.map(product=><ProductCard Product={product}/>  )}
+        <div >
+       { products.map(product=><ProductCard Product={product} key={product.id}/>  )}
         </div>
     )
 }
