@@ -1,3 +1,4 @@
+import ProductDetails from "../Components/ProductDetails";
 import StorePage from "../Components/store";
 
 
@@ -7,8 +8,8 @@ const routes = [
     element: <StorePage />,
   },
   {
-    path: "/",
-    element: <Store />,
+    path: "/product/:id",
+    element: <ProductDetails />,
   },
 ];
 
