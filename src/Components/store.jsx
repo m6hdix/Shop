@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {ContextProvider} from '../Context/ProductContext';
 import ProductCard from './ProductCart';
 
-export default function Store() {
+export default function StorePage() {
     const products =useContext(ContextProvider)
     
     return (
