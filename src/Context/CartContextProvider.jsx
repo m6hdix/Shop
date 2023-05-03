@@ -1,16 +1,53 @@
-import { useReducer } from "react";
+import { useReducer ,createContext } from "react";
 
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      // add item to cart logic
-      return { ...state, cart: [...state.cart, action.payload] };
+      if (!state.selectedItems.find((item) => item.id === action.payload.id)) {
+        state.selectedItems.push({
+          ...action.payload,
+          quantity: 1,
+        });
+      }
+      return {
+        ...state,
+        selectedItems: [...state.selectedItems],
+        itemsCounter: state.itemsCounter + 1,
+        total: state.total + action.payload.price,
+      };
     case "REMOVE_ITEM":
       // remove item from cart logic
-      return { ...state, cart: state.cart.filter(item => item.id !== action.payload) };
-    case "CLEAR_CART":
+      const updatedItems = state.selectedItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      return {
+        ...state,
+        selectedItems: [...updatedItems],
+        itemsCounter: state.itemsCounter - 1,
+        total: state.total - action.payload.price,
+      };
+    case "INCREASE":
+      const indexI = state.selectedItems.findIndex(
+        (item) => item.id == action.payload.id
+      );
+      state.selectedItems[indexI].quantity++;
+      return {
+        ...state,
+      };
+    case "DECREASE":
+      const indexD = state.selectedItems.findIndex(
+        (item) => item.id == action.payload.id
+      );
+      state.selectedItems[indexD].quantity--;
+      return {
+        ...state,
+      };
+    case "CLEAR":
       // clear cart logic
-      return { ...state, cart: [] };
+      return { selectedItems: [], itemsCounter: 0, total: 0, checkout: false };
+    case "CHECKOUT":
+      // checkout logic
+      return { selectedItems: [], itemsCounter: 0, total: 0, checkout: true };
     default:
       return state;
   }
@@ -18,12 +55,22 @@ function cartReducer(state, action) {
 
 const initialState = {
   selectedItems: [],
-  itemsCounter:0,
-  total:0,
-  checkout:0
+  itemsCounter: 0,
+  total: 0,
+  checkout: false,
 };
-
-export default function CartContextProvider() {
+export  const CartContext=createContext()
+export default function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-  // rest of your code
+
+  return (
+    <CartContext.Provider
+      value={{
+        state,
+        dispatch,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }
