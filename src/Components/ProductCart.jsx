@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-export default function ProductCard({Product}) {return(
+export default function ProductCard({Product}) {
+  return(
     <div className="card w-96 bg-base-100 shadow-xl hover:shadow-2xl transition-all">
     <figure className="px-10 pt-10">
       <img src={Product.image} alt="Shoes" className="rounded-xl aspect-square " />
