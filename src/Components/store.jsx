@@ -4,11 +4,12 @@ import ProductCard from "./ProductCart";
 
 export default function StorePage() {
   const products = useContext(ContextProvider);
+  const isLoading = !products.length;
 
   return (
-    <div className={`flex items-center justify-center ${products.length <= 0 ?"h-screen":""}`}>
-      {products.length <= 0 ? (
-        <div className="mockup-code  bg-primary text-primary-content transition-transform">
+    <div className={`flex items-center justify-center ${isLoading ? "h-screen" : ""}`}>
+      {isLoading ? (
+        <div className="mockup-code bg-primary text-primary-content transition-transform">
           <pre data-prefix="$">
             <code>Loading...</code>
           </pre>
