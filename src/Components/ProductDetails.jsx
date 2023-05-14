@@ -15,7 +15,7 @@ export default function ProductDetails() {
   const DetailsProduct = data[id - 1];
 
   // Log the DetailsProduct object to the console. This is for debugging or testing purposes.
-  console.log(DetailsProduct);
+
 
   return (
     <div className="hero min-h-screen bg-base-200">

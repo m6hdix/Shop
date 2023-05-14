@@ -5,7 +5,6 @@ import { QuantityCounter, isInCart } from "../Helper/Helpers";
 
 export default function ProductCard({ Product }) {
   const { state, dispatch } = useContext(CartContext);
-  console.log(QuantityCounter(state, Product.id));
   return (
     <div className="card w-96 bg-base-100 shadow-xl hover:shadow-2xl transition-all">
       <figure className="px-10 pt-10">
@@ -21,6 +20,27 @@ export default function ProductCard({ Product }) {
         </h2>
         <p>{Product.title.split(" ").slice(0, 3).join(" ")}</p>
         <div className="card-actions">
+        {QuantityCounter(state, Product.id) >= 2 && (
+            <button
+              className="btn btn-primary"
+              onClick={() => dispatch({ type: "DECREASE", payload: Product })}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 12h-15"
+                />
+              </svg>
+            </button>
+          )}
           {QuantityCounter(state, Product.id) === 1 && (
             <button
               className="btn btn-primary"
@@ -75,27 +95,7 @@ export default function ProductCard({ Product }) {
               Add To Cart
             </button>
           )}
-          {QuantityCounter(state, Product.id) >= 2 && (
-            <button
-              className="btn btn-primary"
-              onClick={() => dispatch({ type: "DECREASE", payload: Product })}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 12h-15"
-                />
-              </svg>
-            </button>
-          )}
+         
         </div>
       </div>
     </div>
