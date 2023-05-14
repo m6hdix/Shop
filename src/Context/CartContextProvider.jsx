@@ -1,4 +1,4 @@
-import { useReducer ,createContext } from "react";
+import { useReducer, createContext } from "react";
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -59,10 +59,10 @@ const initialState = {
   total: 0,
   checkout: false,
 };
-export  const CartContext=createContext()
+export const CartContext = createContext();
 export default function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-
+  console.log(state)
   return (
     <CartContext.Provider
       value={{
